@@ -12,7 +12,7 @@ File Structure:
 	      avs_crc32_wraper_tb.sv <- system verilog test bench for the CRC32 memory mapped component
 
 
-	.\DE0-NANO-SoC   <- Files for building the DE0-Nano-SoC HPS system with CRC32 Module and LED paralell output
+	.\DE0-NANO-SoC   <- Files for building the DE0-Nano-SoC HPS system with memory mapped CRC32 Module 
 	    HW\DE0_Nano_SoC_CRC32.qar  <- Quartus 20.1 Project archive 
 	    HW\progFile                <- FPGA programing files
 	        de0_nano_soc.rbf       <- programming file loadable by U-BOOT / Linux

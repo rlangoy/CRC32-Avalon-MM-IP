@@ -13,9 +13,11 @@ File Structure:
 
 
 	.\DE0-NANO-SoC   <- Files for building the DE0-Nano-SoC HPS system with CRC32 Module and LED paralell output
-	    HW\DE0_Nano_SoC_CRC32.qar  <- Quartus 20.1 Project archive (Unpack using quartus in this folder)
-	    HW\ip\CRC32                <- CRC32 QSys-compoent source (verilog and testench +.tlc sctipt)
-	    HW\progFile                <- Binary programing files
+	    HW\DE0_Nano_SoC_CRC32.qar  <- Quartus 20.1 Project archive 
+	    HW\progFile                <- FPGA programing files
+	        de0_nano_soc.rbf       <- programming file loadable by U-BOOT / Linux
+	        soc_system.sof         <- Normal quartus programming file
+
 	    
 	.\Linux          <- Files for testing the memorymapped CRC32 module using Python
 	    SW\hwCRC32SpeedTest.py  <- Benchmark of the HW implementet CRC32 IP 

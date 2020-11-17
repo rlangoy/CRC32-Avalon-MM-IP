@@ -24,6 +24,11 @@ File Structure:
 	    SW\pureSWCRC32.py       <- Benchmark SW version of the CRC32 IP
 	    SW\zlibCRC32.py         <- Benchmark of zlib's implementation of CRC32 generation
 
+Installation
+===============
+A prebuildt Linux SD-Card image with U-Boot / CRC32 IP and ebian 10 + samples for DE0-Nano-SoC can be downloaded from : https://github.com/rlangoy/CRC32-Avalon-MM-IP/releases/download/1.0/DE0SocDebian10v4.img.xz  
+   The SD-Card image can be burned using Etcher (https://github.com/balena-io/etcher/releases)
+
 
 About
 ======

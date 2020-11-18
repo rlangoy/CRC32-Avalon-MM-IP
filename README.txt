@@ -44,7 +44,7 @@ Installation:
  	i.  Click "Flash from URL"
  	ii. Paste in the URL: https://github.com/rlangoy/CRC32-Avalon-MM-IP/releases/download/1.0/DE0SocDebian10v4.img.xz and click ok
  	iii. Click "Select target" (the SD-card to place the image on)
- 	iv.  Click "!Flach"
+ 	iv.  Click "!Flash"
  4. Eject (unmount) the SD-Card
  5. Place the SD-Card in the development board and power it on
  6. The log in credentials is:
@@ -67,7 +67,7 @@ Installation:
  	i.  Click "Flash from URL"
  	ii. Paste in the URL: https://github.com/rlangoy/CRC32-Avalon-MM-IP/releases/download/1.0/DE0SocDebian10v4.img.xz and click ok
  	iii. Click "Select target" (the SD-card to place the image on)
- 	iv.  Click "!Flach"
+ 	iv.  Click "!Flash"
  4. Replace the soc_system.rbf on the sd-card with the .\DE1-SoC\HW\progFile\soc_system.rbf
  5. Eject (unmount) the SD-Card
  6. Place the SD-Card in the development board and power it on

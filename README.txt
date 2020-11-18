@@ -15,7 +15,13 @@ File Structure:
 	.\DE0-NANO-SoC   <- Files for building the DE0-Nano-SoC HPS system with memory mapped CRC32 Module 
 	    HW\DE0_Nano_SoC_CRC32.qar  <- Quartus 20.1 Project archive 
 	    HW\progFile                <- FPGA programing files
-	        de0_nano_soc.rbf       <- programming file loadable by U-BOOT / Linux
+	        soc_system.rbf         <- programming file loadable by U-BOOT / Linux
+	        soc_system.sof         <- Normal quartus programming file
+
+	.\DE1-SoC                      <- Files for building the DE1-SoC HPS system with memory mapped CRC32 Module 
+	    HW\DE0_Nano_SoC_CRC32.qar  <- Quartus 20.1 Project archive 
+	    HW\progFile                <- FPGA programing files
+	        soc_system.rbf         <- programming file loadable by U-BOOT / Linux
 	        soc_system.sof         <- Normal quartus programming file
 
 	    
@@ -24,10 +30,103 @@ File Structure:
 	    SW\pureSWCRC32.py       <- Benchmark SW version of the CRC32 IP
 	    SW\zlibCRC32.py         <- Benchmark of zlib's implementation of CRC32 generation
 
-Installation
-===============
-A prebuildt Linux SD-Card image with U-Boot / CRC32 IP and ebian 10 + samples for DE0-Nano-SoC can be downloaded from : https://github.com/rlangoy/CRC32-Avalon-MM-IP/releases/download/1.0/DE0SocDebian10v4.img.xz  
-   The SD-Card image can be burned using Etcher (https://github.com/balena-io/etcher/releases)
+
+
+Installation binary-image for DE0-SoC-Nano
+==========================================
+For ease a  A prebuildt Linux 3.51 SD-Card image with U-Boot / CRC32 IP and Debian 10 + samples for DE0-Nano-SoC is available
+Installation:
+--------------
+ 
+ 1. Download and install balena-etcher (1.5) from balena-io https://github.com/balena-io/etcher/releases
+ 2. Insert a SD-Card of 4GB or more into the PC.
+ 3. Start balena-etcher 
+ 	i.  Click "Flash from URL"
+ 	ii. Paste in the URL: https://github.com/rlangoy/CRC32-Avalon-MM-IP/releases/download/1.0/DE0SocDebian10v4.img.xz and click ok
+ 	iii. Click "Select target" (the SD-card to place the image on)
+ 	iv.  Click "!Flach"
+ 4. Eject (unmount) the SD-Card
+ 5. Place the SD-Card in the development board and power it on
+ 6. The log in credentials is:
+     Login:      root
+     Password:   admin
+
+
+
+Installation binary-image for DE1-SoC-Nano
+==========================================
+The prebuildt Linux 3.15 SD-Card image for DE0-Nano-SoC can be used on the DE1-SoC by only replacing the FPGA-Programming file (soc_system.rbf)
+The SD-Card immage contains U-Boot,Linux 3.51 and Debian 10 + CRC32 Sample test programs.
+
+Installation:
+--------------
+ 
+ 1. Download and install balena-etcher (1.5) from balena-io https://github.com/balena-io/etcher/releases
+ 2. Insert a SD-Card of 4GB or more into the PC.
+ 3. Start balena-etcher 
+ 	i.  Click "Flash from URL"
+ 	ii. Paste in the URL: https://github.com/rlangoy/CRC32-Avalon-MM-IP/releases/download/1.0/DE0SocDebian10v4.img.xz and click ok
+ 	iii. Click "Select target" (the SD-card to place the image on)
+ 	iv.  Click "!Flach"
+ 4. Replace the soc_system.rbf on the sd-card with the .\DE1-SoC\HW\progFile\soc_system.rbf
+ 5. Eject (unmount) the SD-Card
+ 6. Place the SD-Card in the development board and power it on
+ 7. The log in credentials is:
+     Login:      root
+     Password:   admin
+
+
+Create the Binary program files for other FPGA-devices 
+=======================================================
+  a) Start Quartus (v21.1) and Create a new project
+  b) Copy the folder .\ip width content the new project folder.
+  c) Open Quartus and select the menu item Tools |  Platform Designer
+       i.  Open the menu timem Edit | Add and the ip  "USN | CRC32"
+       ii. Close Platform Designer
+  d) In Quartus select the menu item Processing | "Start Compilation" and wait.
+  f) Convert the system_soc to soc_system.rbf
+        select the menu item File | "Convert Programming files..." 
+        i.   Change "Programming File type:" to "Raw Binary file (.rbf)"
+        ii.  Change "Mode:" to "Passive Paralell x16"
+        iii. In "Input files to convert" select "SOF data" click button "Add File.." and select system_soc.sof
+        iv.  Click the generate button
+
+U-BOOT Testing of CRC32-Core
+============================
+
+	1. Connect the USB cable (RS323 USB UART) (Micro-USB-Cable on DE1 and DE0) to the PC and Devlopment board
+    2. Power on the Development board    
+
+    3. Use a serial terminal program to comunicate width the Dev-Board UART
+        Windows:
+         ExtraPuTTY http://www.extraputty.com/download.php
+         or Tera Term http://hp.vector.co.jp/authors/VA002416/teraterm.html )
+        Linux:
+           Start a new terminal
+           Install minicom:
+              sudo apt-install minicom
+              minicom -D/dev/ttyACM0 -b115200 -o
+ 	4.) Stop U-Boot by pressing any when the power is turned on the Dev-board 
+	    a) Program the FPGA HW:
+	          #Load FPGA  from the SD-Card
+	          fatload mmc 0:1 ${fpgadata} system_soc.rbf;
+	          #Program FPGA
+	          fpga load 0 ${fpgadata} ${filesize};
+	          #Enable all bridges (busses)
+	          run bridge_enable_handoff
+
+	    b) Test the CRC32 module
+	            #Add value (byte) to caclulate CRC32 
+	            mw 0xff240000 0x01
+	            #Show the new CRC32 SUM
+	            md 0xff400000 1
+	    c) Reset the CRC32-sum
+	    		#Clear The CRC 32 sum 
+	            mw 0xff240004 0x01
+	            #Add value (byte) to caclulate CRC32 
+	            mw 0xff240000 0x01
+	            #Show the new CRC32 SUM
+	            md 0xff400000 1
 
 
 About

@@ -131,9 +131,10 @@ U-BOOT Testing of CRC32-Core
 
 About
 ======
-The CRC32 verilog code locis using  the CRC32-generator page (https://bues.ch/cms/hacking/crcgen).
+The CRC32 verilog code was created using  the CRC32-generator page (https://bues.ch/cms/hacking/crcgen).
     Online Hardware Simulator can be found at: https://www.edaplayground.com/x/ii7q 
     Online Python CRC32 demo is found at:      https://repl.it/join/zhlmvojd-rrrune
+    Online Rust   CRC32 demo is found at:      https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=1c4c2b1a5f3709144dd3005257619876
     
     
 

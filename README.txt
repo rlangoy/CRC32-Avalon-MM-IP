@@ -119,14 +119,14 @@ U-BOOT Testing of CRC32-Core
 	            #Add value (byte) to caclulate CRC32 
 	            mw 0xff240000 0x01
 	            #Show the new CRC32 SUM
-	            md 0xff400000 1
+	            md 0xff420000 1
 	    c) Reset the CRC32-sum
 	    		#Clear The CRC 32 sum 
 	            mw 0xff240004 0x01
 	            #Add value (byte) to caclulate CRC32 
 	            mw 0xff240000 0x01
 	            #Show the new CRC32 SUM
-	            md 0xff400000 1
+	            md 0xff420000 1
 
 
 About
